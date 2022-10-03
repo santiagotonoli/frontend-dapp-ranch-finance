@@ -1,38 +1,282 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  background: radial-gradient(circle, #4ccdff 0%, #546fff 100%);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+}
+
+.top{
+  margin-left:4%;
+  padding-top:15px;
+  display:flex;
+}
+
+.rond{
+  transition-property: all;
+transition-duration: 200ms;
+transition-timing-function: ease;
+transition-delay: 0s;
+}
+.rond:hover{
+  height: 100px;
+  width: 100px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%; /* <------ use this to make circle div (NOTE: height=width) */
+}
+
+.divider{
+  width: 95%;
+  height: 1px;
+  background-color: white;
+  opacity: calc(40%);
+  border-radius: 50%;
+}
+
+.text-logo{
+  padding-left: 1%;
+  padding-top: 35px;
+  float: left;
+  margin-left: 5px;
+
+}
+#logo-wrapper img{height:30px;pointer-events:none;}
+
+.loan-wrapper{
+  display:flex;
+  margin-left:5%;
+  margin-top: 1%;
+  flex-direction:column;
+}
+
+.loan-box{
+  display:flex;
   align-items: center;
+  height:100%;
+  background-color:#5079F2;
+  border:solid;
+  border-width:1px;
+  border-radius:20px;
+  margin-bottom:15px;
+  margin-right: 5%;
+}
+
+.loan-box-liqui{
+  display:flex;
+  align-items: center;
+  height:100%;
+  background-color:#9C663A;
+  border:solid;
+  border-width:1px;
+  border-radius:20px;
+  margin-bottom:15px;
+  margin-right: 5%;
+}
+.loan-box-repaid{
+  display:flex;
+  align-items: center;
+  height:100%;
+  background-color:#009E39;
+  border:solid;
+  border-width:1px;
+  border-radius:20px;
+  margin-bottom:15px;
+  margin-right: 5%;
+}
+
+.column-title{
+  display:flex;
+  height:100%;
+  font-size: 2.5vh;
+  color:white;
+  opacity: calc(60%);
+  margin-bottom:5px;
+  margin-right: 5%;
+
+}
+
+.loan-title{
+  width: 14.28%;
+  display:flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-weight: bold;
+  font-size: 2.5vh;
+}
+
+.loan-data{
+  width: 14.28%;
+  display:flex;
+  justify-content: center;
+  font-size: 2vh;
+  color:white;
+}
+
+.filterIcons{
+  float: left;
+  width:5vh;
+  height:5vh;
+  border-radius: 50%;
+  border: 1px solid #000;
+}
+.filterButton{
+  width:15%
+}
+@media (max-width: 900px){
+  .filterButton{
+    width:24%
+  }
+}
+
+.cUWXFh{display:flex;align-items:flex-end;-webkit-box-pack:justify;justify-content:space-between;z-index:500;color:rgba(255, 255, 255, 0.5);position:relative;bottom:30;padding-top:1%;width:100%;padding-bottom: 2%;}
+@media (max-width: 900px){
+.cUWXFh{flex-direction:column;-webkit-box-align:center;align-items:center;}
+}
+.eLpUJW{position: relative;
+  margin-left: 3%;
+  z-index: 1;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+  flex-direction: column;}
+  .eLpUJW h2{font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  bottom: 10px;
+  position: relative;}
+
+.bTIjTR{position:relative;position:relative;margin-right:3%;}
+.dAkvW{display:flex;-webkit-box-pack:center;justify-content:center;-webkit-box-align:center;align-items:center;}
+.dAkvW > a{margin-left:14px;}
+.dAkvW > a img{height:30px;}
+.dAkvW > a:first-child{margin-left:0px;}
+.dAkvW > a:nth-child(2) img{height:24px;}
+@media (max-width: 900px){
+.dAkvW{margin:15px 0px 0px;}
+}
+.kikdAh{display:flex;width:100%;}
+.kikdAh a{background:rgb(255, 255, 255);width:40px;height:40px;display:flex;-webkit-box-pack:center;justify-content:center;-webkit-box-align:center;align-items:center;border-radius:50%;margin-right:10px;}
+.kikdAh a img{height:20px;}
+@media (max-width: 900px){
+.kikdAh{-webkit-box-pack:center;justify-content:center;}
+}
+a:-webkit-any-link {
+  color: -webkit-link;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.twitterLogoColored:hover{filter:invert(51%) sepia(45%) saturate(3296%) hue-rotate(177deg) brightness(102%) contrast(90%);}
+.mediumLogoColored:hover{filter:invert(0%) sepia(90%) saturate(0%) hue-rotate(264deg) brightness(0%) contrast(101%);}
+.discordLogoColored:hover{filter: invert(55%) sepia(59%) saturate(7499%) hue-rotate(224deg) brightness(98%) contrast(94%);}
+
+.buttonWrap{
+  display:flex;
+  justify-content: space-between;
+  height:100%;
+  margin-top:15px;
+  margin-bottom:30px;
+  margin-right: 5%;
+}
+
+.button{
+  cursor: pointer;
+  display:flex;
+  justify-content: center;
+  background-color: #9C663A;
   color: white;
+  width: 15%;
+  border: 1px solid #000;
+  border-radius:20px;
+  padding: 7px;
+  font-size: 2.5vh;
 }
 
-.App-link {
-  color: #61dafb;
+.accordionTitleBox{
+  width: 30%;
+}
+.accordionTitle{
+  flex: 1;
+  text-align: left;
+  font-weight: bold;
+  font-size: large;
+}
+.NFTfi{
+  font-size: x-large;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (max-width: 900px){
+  .button{
+    cursor: pointer;
+    display:flex;
+    justify-content: center;
+    background-color: #9C663A;
+    color: white;
+    width: 20%;
+    border: 1px solid #000;
+    border-radius:20px;
+    padding: 7px;
+    font-size: 2vh;
   }
-  to {
-    transform: rotate(360deg);
+  .accordionTitleBox{
+    width: 80%;
   }
+  .accordionTitle{
+    flex: 1;
+    text-align: left;
+    font-weight: bold;
+    font-size: medium;
+  }
+  .NFTfi{
+    font-size: large;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  }
+  @media (max-width: 1250px){
+    .accordionTitleBox{
+      width: 80%;
+    }
+  }
+
+.filter-wrapper{
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
 }
+
+.filter-box{
+  border-radius:20px;
+  background-color: #9c663a00;
+  color: white;
+  margin-right: 10px;
+}
+
+.scrollable-div {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

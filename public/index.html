@@ -1,34 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
+    <link rel="icon" href="./hat_blue_background.png" alt="favicon" width="32" height="32">
+       <link href="app.css" rel="stylesheet" type="text/css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+        <meta name="theme-color" content="#000000">
+        <meta name="title" content="Ranch Finance - Markets">
+        <meta name="description" content="Ranch Finance allows you to insure or get insured on NFT bundles, allowing you to earn returns by going long or short on NFTs.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://ranch.finance/">
+        <meta property="og:title" content="Ranch Finance">
+        <meta property="og:image" content="https://www.ranch.finance/static/media/logo/hat_blue_background.png" />
+        <meta property="og:description" content="Ranch Finance allows you to insure or get insured on NFT bundles, allowing you to earn returns by going long or short on NFTs.">
+        <meta property="twitter:site" content="@RanchFinance">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <title>Ranch Finance</title>
+  
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+        <script>
+  
+    function setThemePreference() {
+      var d = new Date();
+      /*
+      * The getHours() method returns the hour (from 0 to 23) of the specified date and time.
+      * Early mornig = 0 - 6
+      * Morning = 6 - 12
+      * Evening = 12 - 18
+      * Night = 18 - 23
+      */
+      var currentHour = d.getHours();
+  
+      if(currentHour >= 21 || currentHour <= 6) {
+        //$(main).removeClass("main-day");
+        $("#root").addClass("main-night");
+        createStars();
+      } else {
+        $("#root").addClass("main-day");
+      }
+    };
+    function createStars() {
+      for (let i = 0; i < 300; i++) {
+        var x = (Math.random()*100);
+        var y = (Math.random()*100);
+  
+      var $star = $("<div>", {id:"star"+i,"class": "star"});
+      $("#root").append($star);
+      $("#star"+i).css({top: x+"%", left: y+"%", position:'absolute'});
+    }
+    };
+  
+    </script>
+     </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root"><script>setThemePreference();</script>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
