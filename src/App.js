@@ -204,13 +204,16 @@ function App() {
               <Text className="NFTfi">
                  NFTfi Loans
               </Text>
+              <span>
+                     <img src="https://www.ranch.finance/static/media/icons/InfoIcon.svg" alt="info" style="margin-top: 55%;margin-left: 30%;">
+              </span>
             </PopoverTrigger>
             <PopoverContent>
               <PopoverArrow />
               <PopoverCloseButton />
               <PopoverHeader>Howdy Cowboy! 🐎 </PopoverHeader>
               <PopoverBody>
-                Welcome on our NFTfi data tool. We extracted all that gold directly from the mine, the NFTfi smartcontract. Remember this is for informative purpose. Grab your pickaxe, and start looking for what you came for ! ⛏ 
+                Welcome to our NFTFi.com data tool V1. We extracted all these loans directly from the source, the NFTFi.com smart contract. Grab your pickaxe, and start digging for value ! ⛏ 
               </PopoverBody>
             </PopoverContent>
           </Popover>
@@ -221,7 +224,7 @@ function App() {
               <div className='accordionTitleBox'>
                 <AccordionButton>
                   <Box className='accordionTitle'>
-                      Some gold nuggets informations  
+                      Data summary 🌻  
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
@@ -234,9 +237,8 @@ function App() {
                 Liquidated: {allLoans.filter(loan => loan.loan_mat_uri_ty_date ).length}<br/>
                 Number of collections: {collectionList.length}<br/>
                 <br/>
-                Fellow friends, as you could have seen, for some loans there is missing data. Indeed, we can't get those informations for all repaid and liquidated loans with a maturity date before the 28th of September, date we started to fill our database.<br/>
-                Note as well that some loans can be missing from our database due to some missing informations.<br/>
-                By mining this golden data we also mined dark dirty coal loans data that never really existed, like the ones with negative amounts.</b>
+                Fellow ranchers, as you can see, some loans are missing data. As of now, we can't get those informations. You should find reliable data for maturity date inferior to the 28th of September.<br/>
+                By parsing all this data we also found unreliable informations and negative amounts, those loans have been taken out and are being investigated by our cow-boys. Hopefully we'll be able to release a complete V2.</b>
               </AccordionPanel>
               </div>
             </AccordionItem>
