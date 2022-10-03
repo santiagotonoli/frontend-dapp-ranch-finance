@@ -24,7 +24,7 @@ import {
   Select,
   Box
 } from '@chakra-ui/react'
-import { InfoOutlineIcon, SmallCloseIcon } from '@chakra-ui/icons'
+import { SmallCloseIcon } from '@chakra-ui/icons'
 
 function App() {
 
