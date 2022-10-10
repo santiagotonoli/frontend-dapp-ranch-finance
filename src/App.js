@@ -42,7 +42,7 @@ function App() {
     async function loadData() {
       var rawdata = await fetch(`https://ranch-finance.herokuapp.com/loans`);
       var data = await rawdata.json()
-      
+
       var rawdataR = await fetch(`https://ranch-finance.herokuapp.com/loansrepaid`)
       var dataR = await rawdataR.json()
 
@@ -72,7 +72,7 @@ function App() {
     }
     loadCollection()
    }, []);
-   
+
 
    var LoadMore = async () =>{
     setLength(listLength + 10)
@@ -86,7 +86,7 @@ function App() {
         setStatus("Repaid")
         setIsCollection("")
         setisSort("")
-      } 
+      }
       else if(filter === "Liquidated"){
         setLength(10)
         setLoansList(allLoans.filter(loan => loan.loan_mat_uri_ty_date ))
@@ -94,7 +94,7 @@ function App() {
         setStatus("Liquidated")
         setIsCollection("")
         setisSort("")
-      } 
+      }
       else if(filter === "In progress"){
         setLength(10)
         setisStatus(true)
@@ -168,12 +168,12 @@ function App() {
       setisSort(sort)
     }
   }
- 
+
   var collectionFilter = async (collection) => {
       setShowCollection(loansList.filter(loan => loan.name === collection))
       setIsCollection(collection)
   }
-  
+
   var collectionMap = collectionList.map((loan ,i) => {
     return(
     <option key={i} value={loan.name} >{loan.name}</option>
@@ -205,7 +205,7 @@ function App() {
                  NFTfi Loans
               </Text>
               <span>
-                     <img src="https://www.ranch.finance/static/media/icons/InfoIcon.svg" alt="info" style="margin-top: 55%;margin-left: 30%;">
+                     <img src="https://www.ranch.finance/static/media/icons/InfoIcon.svg" alt="info" style={{marginTop: '55%',marginLeft: '30%'}}/>
               </span>
             </PopoverTrigger>
             <PopoverContent>
@@ -213,7 +213,7 @@ function App() {
               <PopoverCloseButton />
               <PopoverHeader>Howdy Cowboy! 🐎 </PopoverHeader>
               <PopoverBody>
-                Welcome to our NFTFi.com data tool V1. We extracted all these loans directly from the source, the NFTFi.com smart contract. Grab your pickaxe, and start digging for value ! ⛏ 
+                Welcome to our NFTFi.com data tool V1. We extracted all these loans directly from the source, the NFTFi.com smart contract. Grab your pickaxe, and start digging for value ! ⛏
               </PopoverBody>
             </PopoverContent>
           </Popover>
@@ -224,7 +224,7 @@ function App() {
               <div className='accordionTitleBox'>
                 <AccordionButton>
                   <Box className='accordionTitle'>
-                      Data summary 🌻  
+                      Data summary 🌻
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
@@ -244,10 +244,10 @@ function App() {
             </AccordionItem>
           </Accordion>
         </div>
-        
+
       <div className="loan-wrapper">
         <Stack direction="row" spacing={4} mb={4}>
-          {isStatus === true ? 
+          {isStatus === true ?
           <div className="filterButton">
             <Select id="Status" onChange={(e)=>{Status(e.target.value)}} placeholder={status} focusBorderColor="white" bg="white" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="9c663a00">
               <option value="All">All</option>
@@ -264,12 +264,12 @@ function App() {
               <option value="Liquidated">Liquidated</option>
             </Select>
           </div>}
-    
-          {isCollection !== "" ? 
+
+          {isCollection !== "" ?
           <div className="filterButton">
             <Select id="Collection" onChange={(e)=>{collectionFilter(e.target.value)}} placeholder={isCollection} focusBorderColor="white" bg="white" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="9c663a00">
               {collectionMap}
-            </Select> 
+            </Select>
           </div>:
           <div className="filterButton">
             <Select id="Collection" onChange={(e)=>{collectionFilter(e.target.value)}} placeholder="Collection" focusBorderColor="white" bg="#9c663a00" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="white">
@@ -277,7 +277,7 @@ function App() {
             </Select>
           </div>}
 
-          {isSort !== "" ? 
+          {isSort !== "" ?
           <div className="filterButton">
             <Select id="Sort" onChange={(e)=>{Sort(e.target.value)}} placeholder={isSort} focusBorderColor="white" bg="white" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="9c663a00">
               <option value="Amount: High to low">Amount: Low to high</option>
@@ -286,7 +286,7 @@ function App() {
               <option value="Duration: High to low">Duration: High to low</option>
               <option value="Old to new">Old to new</option>
               <option value="New to old">New to old</option>
-            </Select> 
+            </Select>
           </div>:
           <div className="filterButton">
             <Select id="Sort" onChange={(e)=>{Sort(e.target.value)}} placeholder="Sort by" focusBorderColor="white" bg="#9c663a00" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="white">
@@ -296,10 +296,10 @@ function App() {
               <option value="Duration: High to low">Duration: High to low</option>
               <option value="Old to new">Old to new</option>
               <option value="New to old">New to old</option>
-            </Select> 
+            </Select>
           </div>}
-          
-        
+
+
           {isCollection || isStatus || isSort ?
             <Tooltip hasArrow label="Clear filters" bg='gray.300' color='black'>
               <SmallCloseIcon onClick={()=>{unselectFilters()}} mr="10px" mt="1%" color="white"/>
@@ -341,15 +341,15 @@ function App() {
           ): status === "Liquidated" ? loansList.slice(0, listLength).map((loan ,i) =>
           <Loans key={i} status={status} name={loan.name} image_url={loan.image_url} loan_id={loan.loan_id} loan_princ_ip_al_amount={loan.loan_princ_ip_al_amount} maximum_repayment_amount={loan.amount_pa_id_to_lender} loan_duration={loan.loan_duration} loan_start_time={loan.loan_start_time} revenue_share={loan.revenue_share} loan_mat_uri_ty_date={loan.loan_mat_uri_ty_date} />
           ):null }
-   
+
         <div className="buttonWrap">
           <div>
           </div>
 
           {/* Button load more when there is a collection filter applied */}
-          {isCollection && showCollection.length > 10 ? 
+          {isCollection && showCollection.length > 10 ?
             (listLength >= showCollection.length ?
-            null : 
+            null :
             <div className="button" onClick={()=>{LoadMore()}}>
               Load more
             </div>): null}
@@ -380,8 +380,8 @@ function App() {
             </div>
             : null }
 
-        </div> 
-      </div> 
+        </div>
+      </div>
       <Footer/>
     </div>
     </ChakraProvider>
