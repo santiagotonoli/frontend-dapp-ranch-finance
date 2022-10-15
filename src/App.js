@@ -246,8 +246,15 @@ function App() {
           <Popover>
             <PopoverTrigger placement="bottom">
               <Text className="NFTfi">
-                 NFTfi Loans
+                 NFTFi.com Loans
               </Text>
+                ;<span>
+                  <img
+                    src="https://www.ranch.finance/static/media/icons/InfoIcon.svg"
+                    alt="info"
+                    style={{ marginTop: "55%", marginLeft: "30%" }}
+                  />
+                </span>
             </PopoverTrigger>
             <PopoverContent>
               <PopoverArrow />
