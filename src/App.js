@@ -22,7 +22,8 @@ import {
   Stack,
   Tooltip,
   Select,
-  Box
+  Box,
+  Skeleton
 } from '@chakra-ui/react'
 import { SmallCloseIcon } from '@chakra-ui/icons'
 
@@ -37,32 +38,17 @@ function App() {
   const [listLength, setLength] = useState(10);
   const [isStatus, setisStatus] = useState(false)
   const [isSort, setisSort] = useState("")
+  const [AmountList, setAmountList] = useState([])
+  const [isSortAmount, setisSortAmount] = useState(false)
+  const [isCurrency, setisCurrency] = useState("")
 
   useEffect(() => {
     async function loadData() {
       var rawdata = await fetch(`https://ranch-finance.herokuapp.com/loans`);
       var data = await rawdata.json()
       
-      var rawdataR = await fetch(`https://ranch-finance.herokuapp.com/loansrepaid`)
-      var dataR = await rawdataR.json()
-
-      var rawdataL = await fetch(`https://ranch-finance.herokuapp.com/loansliquidated`)
-      var dataL = await rawdataL.json()
-
-      for(var i=0;i<data.length;i++){
-        for(var j=0;j<dataR.length;j++){
-          if(data[i].loan_id === dataR[j].loan_id){
-            dataR.splice(j,1)
-          }
-        }
-        for(var k=0;k<dataL.length;k++){
-          if(data[i].loan_id === dataL[k].loan_id){
-            dataL.splice(k,1)
-          }
-        }
-      }
-      setLoansList([...data,...dataR,...dataL])
-      setallLoans([...data,...dataR,...dataL])
+      setLoansList(data)
+      setallLoans(data)
     }
     loadData()
     async function loadCollection() {
@@ -86,6 +72,12 @@ function App() {
         setStatus("Repaid")
         setIsCollection("")
         setisSort("")
+        setisSortAmount(false)
+        setisCurrency("")
+        var selectCollection = document.getElementById("Collection");
+        selectCollection.value = ""
+        var selectSort = document.getElementById("Sort");
+        selectSort.value = ""
       } 
       else if(filter === "Liquidated"){
         setLength(10)
@@ -94,6 +86,12 @@ function App() {
         setStatus("Liquidated")
         setIsCollection("")
         setisSort("")
+        setisSortAmount(false)
+        setisCurrency("")
+        var selectCollection2 = document.getElementById("Collection");
+        selectCollection2.value = ""
+        var selectSort2 = document.getElementById("Sort");
+        selectSort2.value = ""
       } 
       else if(filter === "In progress"){
         setLength(10)
@@ -102,6 +100,12 @@ function App() {
         setLoansList(allLoans.filter(loan => !loan.loan_mat_uri_ty_date && !loan.revenue_share))
         setIsCollection("")
         setisSort("")
+        setisSortAmount(false)
+        setisCurrency("")
+        var selectCollection3 = document.getElementById("Collection");
+        selectCollection3.value = ""
+        var selectSort3 = document.getElementById("Sort");
+        selectSort3.value = ""
       }else if(filter === "All"){
         setLength(10)
         setisStatus(false)
@@ -109,24 +113,38 @@ function App() {
         setLoansList(allLoans.sort((a,b) => b.loan_id - a.loan_id))
         setIsCollection("")
         setisSort("")
+        setisSortAmount(false)
+        setisCurrency("")
+        var selectCollection4 = document.getElementById("Collection");
+        selectCollection4.value = ""
+        var selectSort4 = document.getElementById("Sort");
+        selectSort4.value = ""
       }
   }
 
   var Sort = async (sort) => {
     if(sort === "Amount: Low to high" && !isCollection){
+      setAmountList(loansList)
+      setisSortAmount(true)
       setLength(10)
       setLoansList(loansList.sort((a,b) => a.loan_princ_ip_al_amount - b.loan_princ_ip_al_amount))
       setisSort(sort)
     } else if(sort === "Amount: Low to high" && isCollection){
+      setAmountList(showCollection)
+      setisSortAmount(true)
       setLength(10)
       setLoansList(showCollection.sort((a,b) => a.loan_princ_ip_al_amount - b.loan_princ_ip_al_amount))
       setisSort(sort)
     }
     if( sort === "Amount: High to low" && !isCollection){
+      setAmountList(loansList)
+      setisSortAmount(true)
       setLength(10)
       setLoansList(loansList.sort((a,b) => b.loan_princ_ip_al_amount - a.loan_princ_ip_al_amount))
       setisSort(sort)
     } else if(sort === "Amount: High to low" && isCollection){
+      setAmountList(showCollection)
+      setisSortAmount(true)
       setLength(10)
       setLoansList(showCollection.sort((a,b) => b.loan_princ_ip_al_amount - a.loan_princ_ip_al_amount))
       setisSort(sort)
@@ -168,6 +186,30 @@ function App() {
       setisSort(sort)
     }
   }
+
+  var Currency = async (filter) => {
+    if(!isCollection){
+      if(filter === "ETH"){
+        setLoansList(AmountList.filter(loan => loan.loan_erc20_denomination === "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"))
+        setisCurrency(filter)
+      } 
+      else if(filter === "DAI"){
+        setLoansList(AmountList.filter(loan => loan.loan_erc20_denomination === "0x6B175474E89094C44Da98b954EedeAC495271d0F" ))
+        setisCurrency(filter)
+      } 
+    } else {
+      if(filter === "ETH"){
+        setShowCollection(AmountList.filter(loan => loan.loan_erc20_denomination === "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"))
+        setisCurrency(filter)
+      } 
+      else if(filter === "DAI"){
+        setShowCollection(AmountList.filter(loan => loan.loan_erc20_denomination === "0x6B175474E89094C44Da98b954EedeAC495271d0F" ))
+        setisCurrency(filter)
+      } 
+
+    }
+    
+}
  
   var collectionFilter = async (collection) => {
       setShowCollection(loansList.filter(loan => loan.name === collection))
@@ -183,6 +225,8 @@ function App() {
     setIsCollection("")
     setisStatus("")
     setisSort("")
+    setisSortAmount(false)
+    setisCurrency("")
     setLoansList(allLoans.sort((a,b) => b.loan_id - a.loan_id))
     setLength(10)
     var selectStatus = document.getElementById("Status");
@@ -244,7 +288,7 @@ function App() {
         </div>
         
       <div className="loan-wrapper">
-        <Stack direction="row" spacing={4} mb={4}>
+        <Stack direction="row" spacing={4} mb={4} mr="5%">
           {isStatus === true ? 
           <div className="filterButton">
             <Select id="Status" onChange={(e)=>{Status(e.target.value)}} placeholder={status} focusBorderColor="white" bg="white" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="9c663a00">
@@ -278,7 +322,7 @@ function App() {
           {isSort !== "" ? 
           <div className="filterButton">
             <Select id="Sort" onChange={(e)=>{Sort(e.target.value)}} placeholder={isSort} focusBorderColor="white" bg="white" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="9c663a00">
-              <option value="Amount: High to low">Amount: Low to high</option>
+              <option value="Amount: Low to high">Amount: Low to high</option>
               <option value="Amount: High to low">Amount: High to low</option>
               <option value="Duration: Low to high">Duration: Low to high</option>
               <option value="Duration: High to low">Duration: High to low</option>
@@ -288,13 +332,28 @@ function App() {
           </div>:
           <div className="filterButton">
             <Select id="Sort" onChange={(e)=>{Sort(e.target.value)}} placeholder="Sort by" focusBorderColor="white" bg="#9c663a00" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="white">
-              <option value="Amount: High to low">Amount: Low to high</option>
+              <option value="Amount: Low to high">Amount: Low to high</option>
               <option value="Amount: High to low">Amount: High to low</option>
               <option value="Duration: Low to high">Duration: Low to high</option>
               <option value="Duration: High to low">Duration: High to low</option>
               <option value="Old to new">Old to new</option>
               <option value="New to old">New to old</option>
             </Select> 
+          </div>}
+
+          {isSortAmount === false ? null:
+           isCurrency !== "" ?
+          <div className="filterButton">
+            <Select id="Currency" onChange={(e)=>{Currency(e.target.value)}} placeholder={isCollection} focusBorderColor="white" bg="white" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="9c663a00">
+              <option value="ETH">ETH</option>
+              <option value="DAI">DAI</option>
+            </Select> 
+          </div>:
+          <div className="filterButton">
+            <Select id="Currency" onChange={(e)=>{Currency(e.target.value)}} placeholder="Currency" focusBorderColor="white" bg="#9c663a00" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="white">
+              <option value="ETH">ETH</option>
+              <option value="DAI">DAI</option>
+            </Select>
           </div>}
           
         
@@ -306,60 +365,57 @@ function App() {
 
         </Stack>
         <div className="column-title">
-              <div className="loan-title">
+              <div className="loan-title loan-title-mobile">
                   NFT
               </div>
-              <div className="loan-title">
+              <div className="loan-title mobileHide">
                   ID
               </div>
-              <div className="loan-title">
+              <div className="loan-title loan-title-mobile">
                   Amount
               </div>
-              <div className="loan-title">
+              <div className="loan-title mobileHide">
                   Duration
               </div>
-              <div className="loan-title">
+              <div className="loan-title mobileHide ">
                   Start
               </div>
-              <div className="loan-title">
+              <div className="loan-title loan-title-mobile">
                   Rate
               </div>
-              <div className="loan-title">
+              <div className="loan-title loan-title-mobile">
                   Status
               </div>
 
           </div>
+
+        {loansList.length === 0 ? 
+          <Stack spacing="15px" mr="5%">
+            <Skeleton height='70px' endColor="blue" borderRadius="20px" />
+            <Skeleton height='70px' endColor="blue" borderRadius="20px" />
+            <Skeleton height='70px' endColor="blue" borderRadius="20px"/>
+            <Skeleton height='70px' endColor="blue" borderRadius="20px" />
+            <Skeleton height='70px' endColor="blue" borderRadius="20px" />
+            <Skeleton height='70px' endColor="blue" borderRadius="20px" />
+            <Skeleton height='70px' endColor="blue" borderRadius="20px" />
+            <Skeleton height='70px' endColor="blue" borderRadius="20px" />
+            <Skeleton height='70px' endColor="blue" borderRadius="20px" />
+            <Skeleton height='70px' endColor="blue" borderRadius="20px" />
+          </Stack> : null
+        }
         {isCollection ?
         showCollection.slice(0, listLength).map((loan ,i) =>
-        <Loans key={i} status={status} name={loan.name} image_url={loan.image_url} loan_id={loan.loan_id} loan_princ_ip_al_amount={loan.loan_princ_ip_al_amount} maximum_repayment_amount={loan.maximum_repayment_amount} loan_duration={loan.loan_duration} loan_start_time={loan.loan_start_time} revenue_share={loan.revenue_share} loan_mat_uri_ty_date={loan.loan_mat_uri_ty_date} />
+        <Loans key={i} status={status} loan_erc20_denomination={loan.loan_erc20_denomination} name={loan.name} image_url={loan.image_url} loan_id={loan.loan_id} loan_princ_ip_al_amount={loan.loan_princ_ip_al_amount} maximum_repayment_amount={loan.maximum_repayment_amount} loan_duration={loan.loan_duration} loan_start_time={loan.loan_start_time} revenue_share={loan.revenue_share} loan_mat_uri_ty_date={loan.loan_mat_uri_ty_date} />
         ): status === "" || status === "In progress" ? loansList.slice(0, listLength).map((loan ,i) =>
-          <Loans key={i} status={status} name={loan.name} image_url={loan.image_url} loan_id={loan.loan_id} loan_princ_ip_al_amount={loan.loan_princ_ip_al_amount} maximum_repayment_amount={loan.maximum_repayment_amount} loan_duration={loan.loan_duration} loan_start_time={loan.loan_start_time} revenue_share={loan.revenue_share} loan_mat_uri_ty_date={loan.loan_mat_uri_ty_date} />
+          <Loans key={i} status={status}  loan_erc20_denomination={loan.loan_erc20_denomination} name={loan.name} image_url={loan.image_url} loan_id={loan.loan_id} loan_princ_ip_al_amount={loan.loan_princ_ip_al_amount} maximum_repayment_amount={loan.maximum_repayment_amount} loan_duration={loan.loan_duration} loan_start_time={loan.loan_start_time} revenue_share={loan.revenue_share} loan_mat_uri_ty_date={loan.loan_mat_uri_ty_date} />
           ): status === "Repaid" ? loansList.slice(0, listLength).map((loan ,i) =>
-          <Loans key={i} status={status} name={loan.name} image_url={loan.image_url} loan_id={loan.loan_id} loan_princ_ip_al_amount={loan.loan_princ_ip_al_amount} maximum_repayment_amount={loan.amount_pa_id_to_lender} loan_duration={loan.loan_duration} loan_start_time={loan.loan_start_time} revenue_share={loan.revenue_share} loan_mat_uri_ty_date={loan.loan_mat_uri_ty_date} />
+          <Loans key={i} status={status} loan_erc20_denomination={loan.loan_erc20_denomination} name={loan.name} image_url={loan.image_url} loan_id={loan.loan_id} loan_princ_ip_al_amount={loan.loan_princ_ip_al_amount} maximum_repayment_amount={loan.maximum_repayment_amount} loan_duration={loan.loan_duration} loan_start_time={loan.loan_start_time} revenue_share={loan.revenue_share} loan_mat_uri_ty_date={loan.loan_mat_uri_ty_date} />
           ): status === "Liquidated" ? loansList.slice(0, listLength).map((loan ,i) =>
-          <Loans key={i} status={status} name={loan.name} image_url={loan.image_url} loan_id={loan.loan_id} loan_princ_ip_al_amount={loan.loan_princ_ip_al_amount} maximum_repayment_amount={loan.amount_pa_id_to_lender} loan_duration={loan.loan_duration} loan_start_time={loan.loan_start_time} revenue_share={loan.revenue_share} loan_mat_uri_ty_date={loan.loan_mat_uri_ty_date} />
+          <Loans key={i} status={status} loan_erc20_denomination={loan.loan_erc20_denomination} name={loan.name} image_url={loan.image_url} loan_id={loan.loan_id} loan_princ_ip_al_amount={loan.loan_princ_ip_al_amount} maximum_repayment_amount={loan.maximum_repayment_amount} loan_duration={loan.loan_duration} loan_start_time={loan.loan_start_time} revenue_share={loan.revenue_share} loan_mat_uri_ty_date={loan.loan_mat_uri_ty_date} />
           ):null }
    
-        <div className="buttonWrap">
-          <div>
-          </div>
-
-          {/* Button load more when there is a collection filter applied */}
-          {isCollection && showCollection.length > 10 ? 
-            (listLength >= showCollection.length ?
-            null : 
-            <div className="button" onClick={()=>{LoadMore()}}>
-              Load more
-            </div>): null}
-
-          {/* Button load more when there is no collection filter applied */}
-          {isCollection ? null :
-          (loansList.length <= 10 ?
-          null: listLength >= loansList.length ? null:
-          <div className="button" onClick={()=>{LoadMore()}}>
-            Load more
-          </div>)}
-
+        
+        <div style={{display:"flex", justifyContent:"right", marginTop:"5px", marginRight:"5%"}}>
           {isCollection && showCollection.length > 0 && listLength <= showCollection.length ?
             <div style={{color:"white"}}>
               {listLength}/{showCollection.length} loans
@@ -377,7 +433,23 @@ function App() {
               {loansList.length}/{loansList.length} loans
             </div>
             : null }
+        </div>
+        <div className="buttonWrap">
+          {/* Button load more when there is a collection filter applied */}
+          {isCollection && showCollection.length > 10 ? 
+            (listLength >= showCollection.length ?
+            null : 
+            <div className="button" onClick={()=>{LoadMore()}}>
+              Load More
+            </div>): null}
 
+          {/* Button load more when there is no collection filter applied */}
+          {isCollection ? null :
+          (loansList.length <= 10 ?
+          null: listLength >= loansList.length ? null:
+          <div className="button" onClick={()=>{LoadMore()}}>
+            Load More
+          </div>)}
         </div> 
       </div> 
       <Footer/>

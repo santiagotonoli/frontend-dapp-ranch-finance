@@ -109,6 +109,15 @@ transition-delay: 0s;
   color:white;
 }
 
+.nft-loan-data{
+  margin-top:10px; 
+  margin-bottom:10px;
+  width:14.28%;
+  display:flex;
+  justify-content:center;
+  color:white
+}
+
 .filterIcons{
   float: left;
   width:5vh;
@@ -173,10 +182,9 @@ a:-webkit-any-link {
 
 .buttonWrap{
   display:flex;
-  justify-content: space-between;
-  height:100%;
-  margin-top:15px;
-  margin-bottom:30px;
+  justify-content: center;
+  margin-top:5px;
+  margin-bottom:50px;
   margin-right: 5%;
 }
 
@@ -186,11 +194,9 @@ a:-webkit-any-link {
   justify-content: center;
   background-color: #9C663A;
   color: white;
-  width: 15%;
   border: 1px solid #000;
   border-radius:20px;
   padding: 7px;
-  font-size: 2.5vh;
 }
 
 .accordionTitleBox{
@@ -216,11 +222,9 @@ a:-webkit-any-link {
     justify-content: center;
     background-color: #9C663A;
     color: white;
-    width: 20%;
     border: 1px solid #000;
     border-radius:20px;
     padding: 7px;
-    font-size: 2vh;
   }
   .accordionTitleBox{
     width: 80%;
@@ -262,6 +266,34 @@ a:-webkit-any-link {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+}
+
+@media (max-width: 500px){
+  .mobileHide{
+    display: none;
+  }
+  .loan-title-mobile{
+    width: 25%;
+    display:flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 2.5vh;
+  }
+  .loan-data-mobile{
+    width: 25%;
+    display:flex;
+    justify-content: center;
+    font-size: 2vh;
+    color:white;
+  }
+  .nft-loan-data-mobile{
+    margin-top:10px; 
+    margin-bottom:10px;
+    width:25%;
+    display:flex;
+    justify-content:center;
+    color:white
+  }
 }
 
 
