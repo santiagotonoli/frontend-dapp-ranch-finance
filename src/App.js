@@ -254,7 +254,7 @@ function App() {
               <PopoverCloseButton />
               <PopoverHeader>Howdy Cowboy! 🐎 </PopoverHeader>
               <PopoverBody>
-                Welcome on our NFTfi data tool. We extracted all that gold directly from the mine, the NFTfi smartcontract. Remember this is for informative purpose. Grab your pickaxe, and start looking for what you came for ! ⛏ 
+                Welcome to our NFTFi.com data tool V1. We extracted all these loans directly from the source, the NFTFi.com smart contract. Grab your pickaxe, and start digging for value ! ⛏ 
               </PopoverBody>
             </PopoverContent>
           </Popover>
@@ -265,7 +265,7 @@ function App() {
               <div className='accordionTitleBox'>
                 <AccordionButton>
                   <Box className='accordionTitle'>
-                      Some gold nuggets informations  
+                      Data summary 🦬  
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
@@ -278,9 +278,9 @@ function App() {
                 Liquidated: {allLoans.filter(loan => loan.loan_mat_uri_ty_date ).length}<br/>
                 Number of collections: {collectionList.length}<br/>
                 <br/>
-                Fellow friends, as you could have seen, for some loans there is missing data. Indeed, we can't get those informations for all repaid and liquidated loans with a maturity date before the 28th of September, date we started to fill our database.<br/>
-                Note as well that some loans can be missing from our database due to some missing informations.<br/>
-                By mining this golden data we also mined dark dirty coal loans data that never really existed, like the ones with negative amounts.</b>
+                Some NFTs are lacking a visual due to the API we're using. OpenSea's API key is tough to get nowadays.<br/>
+               We'll do our best to improve this tool, feel free to suggest features on our Discord !
+               </b>
               </AccordionPanel>
               </div>
             </AccordionItem>
