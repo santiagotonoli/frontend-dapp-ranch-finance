@@ -4,6 +4,12 @@
   width: 100%;
 }*/
 
+@media(max-width:600px){
+     .textLogoShow {
+         display: none !important;
+     }
+}
+
 .top{
   margin-left:4%;
   padding-top:15px;
