@@ -46,9 +46,33 @@ function App() {
     async function loadData() {
       var rawdata = await fetch(`https://ranch-finance.herokuapp.com/loans`);
       var data = await rawdata.json()
+<<<<<<< HEAD
       
       setLoansList(data)
       setallLoans(data)
+=======
+
+      var rawdataR = await fetch(`https://ranch-finance.herokuapp.com/loansrepaid`)
+      var dataR = await rawdataR.json()
+
+      var rawdataL = await fetch(`https://ranch-finance.herokuapp.com/loansliquidated`)
+      var dataL = await rawdataL.json()
+
+      for(var i=0;i<data.length;i++){
+        for(var j=0;j<dataR.length;j++){
+          if(data[i].loan_id === dataR[j].loan_id){
+            dataR.splice(j,1)
+          }
+        }
+        for(var k=0;k<dataL.length;k++){
+          if(data[i].loan_id === dataL[k].loan_id){
+            dataL.splice(k,1)
+          }
+        }
+      }
+      setLoansList([...data,...dataR,...dataL])
+      setallLoans([...data,...dataR,...dataL])
+>>>>>>> e27768431b22668c5c515bfecc5fc0481693bdab
     }
     loadData()
     async function loadCollection() {
@@ -58,7 +82,7 @@ function App() {
     }
     loadCollection()
    }, []);
-   
+
 
    var LoadMore = async () =>{
     setLength(listLength + 10)
@@ -72,6 +96,7 @@ function App() {
         setStatus("Repaid")
         setIsCollection("")
         setisSort("")
+<<<<<<< HEAD
         setisSortAmount(false)
         setisCurrency("")
         var selectCollection = document.getElementById("Collection");
@@ -79,6 +104,9 @@ function App() {
         var selectSort = document.getElementById("Sort");
         selectSort.value = ""
       } 
+=======
+      }
+>>>>>>> e27768431b22668c5c515bfecc5fc0481693bdab
       else if(filter === "Liquidated"){
         setLength(10)
         setLoansList(allLoans.filter(loan => loan.loan_mat_uri_ty_date ))
@@ -86,6 +114,7 @@ function App() {
         setStatus("Liquidated")
         setIsCollection("")
         setisSort("")
+<<<<<<< HEAD
         setisSortAmount(false)
         setisCurrency("")
         var selectCollection2 = document.getElementById("Collection");
@@ -93,6 +122,9 @@ function App() {
         var selectSort2 = document.getElementById("Sort");
         selectSort2.value = ""
       } 
+=======
+      }
+>>>>>>> e27768431b22668c5c515bfecc5fc0481693bdab
       else if(filter === "In progress"){
         setLength(10)
         setisStatus(true)
@@ -187,6 +219,7 @@ function App() {
     }
   }
 
+<<<<<<< HEAD
   var Currency = async (filter) => {
     if(!isCollection){
       if(filter === "ETH"){
@@ -211,11 +244,13 @@ function App() {
     
 }
  
+=======
+>>>>>>> e27768431b22668c5c515bfecc5fc0481693bdab
   var collectionFilter = async (collection) => {
       setShowCollection(loansList.filter(loan => loan.name === collection))
       setIsCollection(collection)
   }
-  
+
   var collectionMap = collectionList.map((loan ,i) => {
     return(
     <option key={i} value={loan.name} >{loan.name}</option>
@@ -254,7 +289,7 @@ function App() {
               <PopoverCloseButton />
               <PopoverHeader>Howdy Cowboy! 🐎 </PopoverHeader>
               <PopoverBody>
-                Welcome on our NFTfi data tool. We extracted all that gold directly from the mine, the NFTfi smartcontract. Remember this is for informative purpose. Grab your pickaxe, and start looking for what you came for ! ⛏ 
+                Welcome to our NFTFi.com data tool V1. We extracted all these loans directly from the source, the NFTFi.com smart contract. Grab your pickaxe, and start digging for value ! ⛏
               </PopoverBody>
             </PopoverContent>
           </Popover>
@@ -265,7 +300,7 @@ function App() {
               <div className='accordionTitleBox'>
                 <AccordionButton>
                   <Box className='accordionTitle'>
-                      Some gold nuggets informations  
+                      Data summary 🌻
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
@@ -278,18 +313,22 @@ function App() {
                 Liquidated: {allLoans.filter(loan => loan.loan_mat_uri_ty_date ).length}<br/>
                 Number of collections: {collectionList.length}<br/>
                 <br/>
-                Fellow friends, as you could have seen, for some loans there is missing data. Indeed, we can't get those informations for all repaid and liquidated loans with a maturity date before the 28th of September, date we started to fill our database.<br/>
-                Note as well that some loans can be missing from our database due to some missing informations.<br/>
-                By mining this golden data we also mined dark dirty coal loans data that never really existed, like the ones with negative amounts.</b>
+                Fellow ranchers, as you can see, some loans are missing data. As of now, we can't get those informations. You should find reliable data for maturity date inferior to the 28th of September.<br/>
+                By parsing all this data we also found unreliable informations and negative amounts, those loans have been taken out and are being investigated by our cow-boys. Hopefully we'll be able to release a complete V2.</b>
               </AccordionPanel>
               </div>
             </AccordionItem>
           </Accordion>
         </div>
-        
+
       <div className="loan-wrapper">
+<<<<<<< HEAD
         <Stack direction="row" spacing={4} mb={4} mr="5%">
           {isStatus === true ? 
+=======
+        <Stack direction="row" spacing={4} mb={4}>
+          {isStatus === true ?
+>>>>>>> e27768431b22668c5c515bfecc5fc0481693bdab
           <div className="filterButton">
             <Select id="Status" onChange={(e)=>{Status(e.target.value)}} placeholder={status} focusBorderColor="white" bg="white" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="9c663a00">
               <option value="All">All</option>
@@ -306,12 +345,12 @@ function App() {
               <option value="Liquidated">Liquidated</option>
             </Select>
           </div>}
-    
-          {isCollection !== "" ? 
+
+          {isCollection !== "" ?
           <div className="filterButton">
             <Select id="Collection" onChange={(e)=>{collectionFilter(e.target.value)}} placeholder={isCollection} focusBorderColor="white" bg="white" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="9c663a00">
               {collectionMap}
-            </Select> 
+            </Select>
           </div>:
           <div className="filterButton">
             <Select id="Collection" onChange={(e)=>{collectionFilter(e.target.value)}} placeholder="Collection" focusBorderColor="white" bg="#9c663a00" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="white">
@@ -319,7 +358,7 @@ function App() {
             </Select>
           </div>}
 
-          {isSort !== "" ? 
+          {isSort !== "" ?
           <div className="filterButton">
             <Select id="Sort" onChange={(e)=>{Sort(e.target.value)}} placeholder={isSort} focusBorderColor="white" bg="white" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="9c663a00">
               <option value="Amount: Low to high">Amount: Low to high</option>
@@ -328,7 +367,7 @@ function App() {
               <option value="Duration: High to low">Duration: High to low</option>
               <option value="Old to new">Old to new</option>
               <option value="New to old">New to old</option>
-            </Select> 
+            </Select>
           </div>:
           <div className="filterButton">
             <Select id="Sort" onChange={(e)=>{Sort(e.target.value)}} placeholder="Sort by" focusBorderColor="white" bg="#9c663a00" borderRadius='15px' borderWidth='1px' borderColor="white" mr="10px" color="white">
@@ -338,9 +377,10 @@ function App() {
               <option value="Duration: High to low">Duration: High to low</option>
               <option value="Old to new">Old to new</option>
               <option value="New to old">New to old</option>
-            </Select> 
+            </Select>
           </div>}
 
+<<<<<<< HEAD
           {isSortAmount === false ? null:
            isCurrency !== "" ?
           <div className="filterButton">
@@ -357,6 +397,9 @@ function App() {
           </div>}
           
         
+=======
+
+>>>>>>> e27768431b22668c5c515bfecc5fc0481693bdab
           {isCollection || isStatus || isSort ?
             <Tooltip hasArrow label="Clear filters" bg='gray.300' color='black'>
               <SmallCloseIcon onClick={()=>{unselectFilters()}} mr="10px" mt="1%" color="white"/>
@@ -413,9 +456,33 @@ function App() {
           ): status === "Liquidated" ? loansList.slice(0, listLength).map((loan ,i) =>
           <Loans key={i} status={status} loan_erc20_denomination={loan.loan_erc20_denomination} name={loan.name} image_url={loan.image_url} loan_id={loan.loan_id} loan_princ_ip_al_amount={loan.loan_princ_ip_al_amount} maximum_repayment_amount={loan.maximum_repayment_amount} loan_duration={loan.loan_duration} loan_start_time={loan.loan_start_time} revenue_share={loan.revenue_share} loan_mat_uri_ty_date={loan.loan_mat_uri_ty_date} />
           ):null }
+<<<<<<< HEAD
    
         
         <div style={{display:"flex", justifyContent:"right", marginTop:"5px", marginRight:"5%"}}>
+=======
+
+        <div className="buttonWrap">
+          <div>
+          </div>
+
+          {/* Button load more when there is a collection filter applied */}
+          {isCollection && showCollection.length > 10 ?
+            (listLength >= showCollection.length ?
+            null :
+            <div className="button" onClick={()=>{LoadMore()}}>
+              Load more
+            </div>): null}
+
+          {/* Button load more when there is no collection filter applied */}
+          {isCollection ? null :
+          (loansList.length <= 10 ?
+          null: listLength >= loansList.length ? null:
+          <div className="button" onClick={()=>{LoadMore()}}>
+            Load more
+          </div>)}
+
+>>>>>>> e27768431b22668c5c515bfecc5fc0481693bdab
           {isCollection && showCollection.length > 0 && listLength <= showCollection.length ?
             <div style={{color:"white"}}>
               {listLength}/{showCollection.length} loans
@@ -443,6 +510,7 @@ function App() {
               Load More
             </div>): null}
 
+<<<<<<< HEAD
           {/* Button load more when there is no collection filter applied */}
           {isCollection ? null :
           (loansList.length <= 10 ?
@@ -452,6 +520,10 @@ function App() {
           </div>)}
         </div> 
       </div> 
+=======
+        </div>
+      </div>
+>>>>>>> e27768431b22668c5c515bfecc5fc0481693bdab
       <Footer/>
     </div>
     </ChakraProvider>
