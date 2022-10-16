@@ -278,8 +278,8 @@ function App() {
                 Liquidated: {allLoans.filter(loan => loan.loan_mat_uri_ty_date ).length}<br/>
                 Number of collections: {collectionList.length}<br/>
                 <br/>
-                Some NFTs are lacking a visual due to the API we're using. OpenSea's API key is tough to get nowadays.<br/>
-               We'll do our best to improve this tool, feel free to suggest features on our Discord ! 😉
+                Some NFTs are lacking a visual due to the unreliability of their hosting. Some have no visuals as of now and are not displayed. 🌵<br/>
+               We'll do our best to improve this tool continuously, feel free to suggest features on our Discord ! 🤠
                </b>
               </AccordionPanel>
               </div>
