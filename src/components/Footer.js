@@ -4,16 +4,16 @@ function Footer() {
   return (
     <div className="cUWXFh">
       <div className="eLpUJW">
-        <h2>Integrations and partners</h2>
+        <h2>Integrations </h2> <!--and partners</h2>-->
         <div className="kikdAh">
-          <a href="https://compound.finance/" target="_blank" rel="noopener noreferrer">
-          <img src="https://www.ranch.finance/static/media/partners/compound.svg" alt="compound"/></a>
+          <!--<a href="https://compound.finance/" target="_blank" rel="noopener noreferrer">
+          <img src="https://www.ranch.finance/static/media/partners/compound.svg" alt="compound"/></a>-->
 
           <a href="https://www.nftfi.com" target="_blank" rel="noopener noreferrer">
           <img src="https://www.ranch.finance/static/media/partners/nftfi.png" alt="aave"/></a>
 
-          <a href="https://www.uniswap.org" target="_blank" rel="noopener noreferrer">
-          <img src="https://www.ranch.finance/static/media/partners/uniswap.svg" alt="uniswap"/></a>
+          <!--<a href="https://www.uniswap.org" target="_blank" rel="noopener noreferrer">
+          <img src="https://www.ranch.finance/static/media/partners/uniswap.svg" alt="uniswap"/></a>-->
         </div>
       </div>
       <div className="bTIjTR">
