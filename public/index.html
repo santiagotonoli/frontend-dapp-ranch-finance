@@ -20,7 +20,16 @@
   
         <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
         <script>
+  function createStars() {
+      for (let i = 0; i < 300; i++) {
+        var x = (Math.random()*100);
+        var y = (Math.random()*100);
   
+      var $star = $("<div>", {id:"star"+i,"class": "star"});
+      $("#root").append($star);
+      $("#star"+i).css({top: x+"%", left: y+"%", position:'absolute'});
+    }
+    };
     function setThemePreference() {
       var d = new Date();
       /*
@@ -40,16 +49,6 @@
         $("#root").addClass("main-day");
       }
     };
-    function createStars() {
-      for (let i = 0; i < 300; i++) {
-        var x = (Math.random()*100);
-        var y = (Math.random()*100);
-  
-      var $star = $("<div>", {id:"star"+i,"class": "star"});
-      $("#root").append($star);
-      $("#star"+i).css({top: x+"%", left: y+"%", position:'absolute'});
-    }
-    };
     </script>
      </head>
   <body>
@@ -67,5 +66,4 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
-  <script>createStars();</script>
 </html>
