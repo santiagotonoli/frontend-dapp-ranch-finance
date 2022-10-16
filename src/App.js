@@ -279,7 +279,7 @@ function App() {
                 Number of collections: {collectionList.length}<br/>
                 <br/>
                 Some NFTs are lacking a visual due to the API we're using. OpenSea's API key is tough to get nowadays.<br/>
-               We'll do our best to improve this tool, feel free to suggest features on our Discord !
+               We'll do our best to improve this tool, feel free to suggest features on our Discord ! 😉
                </b>
               </AccordionPanel>
               </div>
