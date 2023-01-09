@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     async function loadData() {
-      var rawdata = await fetch('https://ranch-finance.herokuapp.com/loans');
+      var rawdata = await fetch('https://subprime.uk.r.appspot.com/loans');
       var data = await rawdata.json()
       
       setLoansList(data)
@@ -52,7 +52,7 @@ function App() {
     }
     loadData()
     async function loadCollection() {
-      var rawdata = await fetch('https://ranch-finance.herokuapp.com/collections');
+      var rawdata = await fetch('https://subprime.uk.r.appspot.com/collections');
       var data = await rawdata.json()
       setListCollection(data);
     }
