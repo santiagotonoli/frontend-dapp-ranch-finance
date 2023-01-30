@@ -1,8 +1,8 @@
 import '../App.css';
 
-function Footer() {
+function Footer(props) {
   return (
-    <div className="cUWXFh">
+    <div  className={props.class}>
       <div className="eLpUJW">
         <h2>Integrations </h2>
         <div className="kikdAh">
@@ -23,7 +23,7 @@ function Footer() {
             </a>
           </div>
         </div>
-      </div>
+    </div>
 
   );
 }

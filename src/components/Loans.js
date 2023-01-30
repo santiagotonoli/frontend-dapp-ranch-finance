@@ -1,6 +1,8 @@
 import React from 'react';
 import '../App.css';
 import { Tooltip } from '@chakra-ui/react'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 
 function Loans(props) {
@@ -38,7 +40,8 @@ function Loans(props) {
     }
 
   return (
-        <div className={type}>
+    
+        <Link  to={`/details/${props.loan_id}`} style={{ textDecoration: 'none', borderColor:'black' }} className={type} onClick={()=>props.pickLoanFunction(props.loan)}>
                 <div className="nft-loan-data nft-loan-data-mobile">
                     <Tooltip hasArrow label={props.name} bg='gray.300' color='black'>
                         <img alt="LogoNFT" class="filterIcons" src={props.image_url[0] === "i" ? props.image_url.replace("ipfs://", "https://ipfs.io/ipfs/"):props.image_url}/>
@@ -55,20 +58,29 @@ function Loans(props) {
                     duration(props.loan_duration) + " days" : "Unknown"}
                 </div>
                 <div className="loan-data mobileHide">
-                {props.loan_start_time ?
-                    timeConverter(props.loan_start_time) : "Unknown"}
+                {props.loan_start_time ? timeConverter(props.loan_start_time) : "Unknown"}
                 </div>
                 <div className="loan-data loan-data-mobile">
                   <Tooltip hasArrow label={"APR: "+(Math.round((((interest_rate(props.loan_princ_ip_al_amount / 1000000, props.maximum_repayment_amount / 1000000)/duration(props.loan_duration))*360)) * 100) / 100).toFixed(2) + "%"} bg='gray.300' color='black'>
-                    {props.amount_pa_id_to_lender || props.maximum_repayment_amount ?
-                        (Math.round((interest_rate(props.loan_princ_ip_al_amount / 1000000, props.maximum_repayment_amount / 1000000)) * 100) / 100).toFixed(2) + "%" : "Unknown"}
+                    {props.amount_pa_id_to_lender || props.maximum_repayment_amount ? (Math.round((interest_rate(props.loan_princ_ip_al_amount / 1000000, props.maximum_repayment_amount / 1000000)) * 100) / 100).toFixed(2) + "%" : "Unknown"}
                   </Tooltip>
                 </div>
                 <div className="loan-data loan-data-mobile">
                     {props.revenue_share? "Repaid": props.loan_mat_uri_ty_date ? "Liquidated" : "In progress"}
                 </div>
-        </div>
+        </Link>
   );
 }
-
-  export default (Loans);
+function mapDispatchToProps(dispatch){
+    return {
+      pickLoanFunction: function(loan){
+        dispatch({type: 'pickLoan',
+          loan
+        })
+      }
+    }
+  }
+  export default connect(
+    null,
+    mapDispatchToProps
+  )(Loans);
