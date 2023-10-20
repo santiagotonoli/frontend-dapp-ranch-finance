@@ -3,10 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.10",
+    "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.3.4",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -16,6 +20,9 @@
     "@visx/mock-data": "^3.0.0",
     "@visx/shape": "^3.0.0",
     "@visx/tooltip": "^3.0.0",
+    "babel-plugin-macros": "^3.1.0",
+    "dotenv": "^16.0.3",
+    "ethers": "^5.6.9",
     "framer-motion": "^7.3.6",
     "nodemon": "^2.0.20",
     "react": "^18.2.0",
@@ -27,7 +34,8 @@
     "reactstrap": "^9.1.4",
     "redux": "^4.2.0",
     "sass": "^1.55.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "web3": "^1.8.2"
   },
   "scripts": {
     "start": "react-scripts start",
